@@ -2,25 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-class Entry
-{
-  public string Prompt { get; set; }
-  public string Response { get; set; }
-  public DateTime Date { get; set; }
-
-  public Entry(string prompt, string response)
-  {
-    Prompt = prompt;
-    Response = response;
-    Date = DateTime.Now;
-  }
-
-  public override string ToString()
-  {
-    return $"Date: {Date}\nPrompt: {Prompt}\nResponse: {Response}\n";
-  }
-}
-
 class Journal
 {
   private List<Entry> entries = new List<Entry>();
@@ -37,6 +18,11 @@ class Journal
     {
       Console.WriteLine(entry);
     }
+  }
+
+  public int EntriesCount()
+  {
+      return entries.Count;
   }
 
   public void SaveToFile(string fileName)
@@ -92,21 +78,5 @@ class Journal
     {
       Console.WriteLine($"An error occurred while loading the journal: {ex.Message}");
     }
-  }
-
-  public static string GetRandomPrompt()
-  {
-    List<string> prompts = new List<string>
-        {
-            "Who was the most interesting person I interacted with today?",
-            "What was the best part of my day?",
-            "How did I see the hand of the Lord in my life today?",
-            "What was the strongest emotion I felt today?",
-            "If I had one thing I could do over today, what would it be?"
-        };
-
-    Random random = new Random();
-    int index = random.Next(prompts.Count);
-    return prompts[index];
   }
 }

@@ -22,14 +22,25 @@ class Program
       switch (choice)
       {
         case "1":
+          string prompt = PromptGenerator.GetRandomPrompt();
+          Console.WriteLine($"Prompt: {prompt}");
           Console.Write("Enter your response: ");
           string response = Console.ReadLine();
-          journal.AddEntry(Journal.GetRandomPrompt(), response);
+          journal.AddEntry(prompt, response);
           break;
 
+
         case "2":
-          journal.DisplayEntries();
+          if (journal.EntriesCount() == 0)
+          {
+              Console.WriteLine("The journal is empty. Add some entries first.");
+          }
+          else
+          {
+              journal.DisplayEntries();
+          }
           break;
+
 
         case "3":
           Console.Write("Enter the file name to save: ");
