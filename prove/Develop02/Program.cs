@@ -2,44 +2,68 @@ using System;
 
 class Program
 {
-    static void Main(string[] args)
+  static void Main(string[] args)
+  {
+    Journal journal = new Journal();
+    bool isRunning = true;
+
+    while (isRunning)
     {
-        Console.Write("What is your grade percentage? ");
-        string answer = Console.ReadLine();
-        int percent = int.Parse(answer);
+      Console.WriteLine("\nJournal App Menu:");
+      Console.WriteLine("1. Write a new entry");
+      Console.WriteLine("2. Display the journal");
+      Console.WriteLine("3. Save the journal to a file");
+      Console.WriteLine("4. Load the journal from a file");
+      Console.WriteLine("5. Exit");
 
-        string letter = "";
+      Console.Write("Select an option (1-5): ");
+      string choice = Console.ReadLine();
 
-        if (percent >= 90)
-        {
-            letter = "A";
-        }
-        else if (percent >= 80)
-        {
-            letter = "B";
-        }
-        else if (percent >= 70)
-        {
-            letter = "C";
-        }
-        else if (percent >= 60)
-        {
-            letter = "D";
-        }
-        else
-        {
-            letter = "F";
-        }
+      switch (choice)
+      {
+        case "1":
+          string prompt = PromptGenerator.GetRandomPrompt();
+          Console.WriteLine($"Prompt: {prompt}");
+          Console.Write("Enter your response: ");
+          string response = Console.ReadLine();
+          journal.AddEntry(prompt, response);
+          break;
 
-        Console.WriteLine($"Your grade is: {letter}");
-        
-        if (percent >= 70)
-        {
-            Console.WriteLine("You passed!");
-        }
-        else
-        {
-            Console.WriteLine("Better luck next time!");
-        }
+
+        case "2":
+          if (journal.EntriesCount() == 0)
+          {
+              Console.WriteLine("The journal is empty. Add some entries first.");
+          }
+          else
+          {
+              journal.DisplayEntries();
+          }
+          break;
+
+
+        case "3":
+          Console.Write("Enter the file name to save: ");
+          string saveFileName = Console.ReadLine();
+          journal.SaveToFile(saveFileName);
+          Console.WriteLine("Journal saved successfully.");
+          break;
+
+        case "4":
+          Console.Write("Enter the file name to load: ");
+          string loadFileName = Console.ReadLine();
+          journal.LoadFromFile(loadFileName);
+          Console.WriteLine("Journal loaded successfully.");
+          break;
+
+        case "5":
+          isRunning = false;
+          break;
+
+        default:
+          Console.WriteLine("Invalid choice. Please select a valid option (1-5).");
+          break;
+      }
     }
+  }
 }
