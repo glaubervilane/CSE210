@@ -15,9 +15,6 @@ class Program
         library.AddScripture(new Reference("Philippians", 4, 13), "I can do all things through Christ who strengthens me.");
 
 
-        // Load scriptures from file
-        library.LoadScripturesFromFile("scriptures.txt");
-
         while (true)
         {
             Console.Clear();
@@ -37,7 +34,7 @@ class Program
 
                     if (input.ToLower() == "quit")
                         // Exit the program if 'quit' is typed
-                        return; 
+                        return;
 
                     scripture.HideNextWord();
 
