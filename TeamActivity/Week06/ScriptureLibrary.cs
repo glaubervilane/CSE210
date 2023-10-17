@@ -13,11 +13,19 @@ public class ScriptureLibrary
             string[] lines = File.ReadAllLines(filePath);
             foreach (string line in lines)
             {
+                Console.WriteLine($"Parsing line: {line}");
                 string[] parts = line.Split('|');
                 if (parts.Length == 2)
                 {
-                    Reference reference = Reference.Parse(parts[0]);
-                    scriptures.Add(new Scripture(reference, parts[1]));
+                    try
+                    {
+                        Reference reference = Reference.Parse(parts[0]);
+                        scriptures.Add(new Scripture(reference, parts[1]));
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error parsing line: {line}. Error: {ex.Message}");
+                    }
                 }
             }
         }

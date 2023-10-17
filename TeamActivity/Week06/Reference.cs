@@ -23,20 +23,27 @@ public class Reference
 
   public static Reference Parse(string referenceString)
   {
-    string[] parts = referenceString.Split(' ');
-    if (parts.Length >= 3)
-    {
-      string book = parts[0];
-      int chapter = int.Parse(parts[1]);
-      string[] verseParts = parts[2].Split('-');
-      int startVerse = int.Parse(verseParts[0]);
-      int endVerse = startVerse;
-      if (verseParts.Length > 1)
+      string[] parts = referenceString.Split('|'); // Split the input by the pipe character ('|')
+      if (parts.Length == 2)
       {
-        endVerse = int.Parse(verseParts[1]);
+          string referencePart = parts[0].Trim();
+          string textPart = parts[1].Trim();
+
+          string[] referenceParts = referencePart.Split(' ');
+          if (referenceParts.Length >= 3)
+          {
+              string book = referenceParts[0];
+              int chapter = int.Parse(referenceParts[1]);
+              string[] verseParts = referenceParts[2].Split('-');
+              int startVerse = int.Parse(verseParts[0]);
+              int endVerse = startVerse;
+              if (verseParts.Length > 1)
+              {
+                  endVerse = int.Parse(verseParts[1]);
+              }
+              return new Reference(book, chapter, startVerse, endVerse);
+          }
       }
-      return new Reference(book, chapter, startVerse, endVerse);
-    }
-    throw new ArgumentException("Invalid reference format.");
+      throw new ArgumentException("Invalid reference format.");
   }
 }
