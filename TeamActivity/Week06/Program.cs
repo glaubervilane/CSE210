@@ -10,7 +10,6 @@ class Program
         library.AddScripture(new Reference("John", 3, 16), "For God so loved the world...");
         library.AddScripture(new Reference("Proverbs", 3, 5, 6), "Trust in the Lord with all your heart...");
 
-
         // Load scriptures from files
         library.LoadScripturesFromFile("scriptures.txt"); // You can provide your own file path
 
@@ -28,26 +27,21 @@ class Program
                     Console.Clear();
                     Console.WriteLine(scripture.RenderScripture());
 
-                    Console.Write("Press Enter to hide words or type 'quit' to exit: ");
+                    Console.Write("Press Enter to hide a word or type 'quit' to exit: ");
                     string input = Console.ReadLine();
 
                     if (input.ToLower() == "quit")
-                        break;
+                        return; // Exit the program if 'quit' is typed
 
-                    scripture.HideNextWords(3);
+                    scripture.HideNextWord();
 
                     if (scripture.IsCompletelyHidden())
                     {
                         Console.Clear();
                         Console.WriteLine("You've memorized the entire scripture!");
-                        break;
+                        break; // Exit the inner loop
                     }
                 }
-
-                Console.WriteLine("Press Enter to select another scripture or type 'quit' to exit.");
-                string choice = Console.ReadLine();
-                if (choice.ToLower() == "quit")
-                    break;
             }
             else
             {

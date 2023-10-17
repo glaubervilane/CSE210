@@ -6,6 +6,8 @@ public class Scripture
     private List<Word> words;
     public Reference Reference { get; }
 
+    private int currentWordIndex = 0;
+
     public Scripture(Reference reference, string text)
     {
         Reference = reference;
@@ -19,19 +21,18 @@ public class Scripture
         }
     }
 
-    public void HideNextWords(int numWordsToHide)
+    public void HideNextWord()
     {
-        Random random = new Random();
-        for (int i = 0; i < numWordsToHide; i++)
+        if (currentWordIndex < words.Count)
         {
-            int index = random.Next(words.Count);
-            words[index].Hide();
+            words[currentWordIndex].Hide();
+            currentWordIndex++;
         }
     }
 
     public bool IsCompletelyHidden()
     {
-        return words.TrueForAll(word => word.IsHidden);
+        return currentWordIndex >= words.Count;
     }
 
     public string RenderScripture()
