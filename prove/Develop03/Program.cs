@@ -14,17 +14,16 @@ class Program
         library.AddScripture(new Reference("Matthew", 11, 28), "Come to me, all you who are weary and burdened, and I will give you rest.");
         library.AddScripture(new Reference("Philippians", 4, 13), "I can do all things through Christ who strengthens me.");
 
-
         while (true)
         {
             Console.Clear();
-
             Scripture scripture = library.SelectRandomScripture();
 
             if (scripture != null)
             {
-                // Display and interact with the selected scripture
-                while (true)
+                bool memorized = false;
+
+                while (!scripture.IsCompletelyHidden())
                 {
                     Console.Clear();
                     Console.WriteLine(scripture.RenderScripture());
@@ -33,18 +32,23 @@ class Program
                     string input = Console.ReadLine();
 
                     if (input.ToLower() == "quit")
-                        // Exit the program if 'quit' is typed
                         return;
 
-                    scripture.HideNextWord();
+                    scripture.HideRandom();
 
                     if (scripture.IsCompletelyHidden())
                     {
-                        Console.Clear();
-                        Console.WriteLine("You've memorized the entire scripture!");
-                        // Exit the inner loop
+                        memorized = true;
                         break;
                     }
+                }
+
+                if (memorized)
+                {
+                    Console.Clear();
+                    Console.WriteLine("You've memorized the entire scripture!");
+                    Console.WriteLine("Press Enter to continue...");
+                    Console.ReadLine();
                 }
             }
             else

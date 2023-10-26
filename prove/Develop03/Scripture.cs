@@ -1,9 +1,10 @@
+// Scripture.cs
 using System;
 using System.Collections.Generic;
 
 public class Scripture
 {
-    private List<Word> words;
+    private List<Word> _words;
     public Reference Reference { get; }
 
     private int currentWordIndex = 0;
@@ -11,33 +12,44 @@ public class Scripture
     public Scripture(Reference reference, string text)
     {
         Reference = reference;
-        words = new List<Word>();
+        _words = new List<Word>();
 
-        // Split the text into words and create Word objects
         string[] wordArray = text.Split(' ');
         foreach (var word in wordArray)
         {
-            words.Add(new Word(word));
+            _words.Add(new Word(word));
         }
     }
 
-    public void HideNextWord()
+    public void HideRandom()
     {
-        if (currentWordIndex < words.Count)
+        if (currentWordIndex < _words.Count)
         {
-            words[currentWordIndex].Hide();
-            currentWordIndex++;
+            List<int> hiddenIndexes = _words
+                .Select((word, index) => new { Word = word, Index = index })
+                .Where(item => !item.Word.IsHidden)
+                .Select(item => item.Index)
+                .ToList();
+
+            if (hiddenIndexes.Count > 0)
+            {
+                Random random = new Random();
+                int randomIndex = random.Next(0, hiddenIndexes.Count);
+                _words[hiddenIndexes[randomIndex]].Hide();
+                currentWordIndex++;
+            }
         }
     }
 
     public bool IsCompletelyHidden()
     {
-        return currentWordIndex >= words.Count;
+        return currentWordIndex >= _words.Count;
     }
 
     public string RenderScripture()
     {
-        string renderedText = string.Join(" ", words);
-        return $"{Reference}: {renderedText}";
+        List<string> visibleWords = _words.ConvertAll(word => word.ToString());
+        string renderedText = string.Join(" ", visibleWords);
+        return $"{Reference.GetFormattedReference()}| {renderedText}";
     }
 }
