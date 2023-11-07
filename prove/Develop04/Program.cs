@@ -14,20 +14,34 @@ class Program
 
             string choice = Console.ReadLine();
 
-            if (choice == "1")
+            if (choice == "1" || choice == "2" || choice == "3")
             {
-                BreathingActivity breathingActivity = new BreathingActivity(5);
-                breathingActivity.StartActivity();
-            }
-            else if (choice == "2")
-            {
-                ReflectionActivity reflectionActivity = new ReflectionActivity(3);
-                reflectionActivity.StartActivity();
-            }
-            else if (choice == "3")
-            {
-                ListingActivity listingActivity = new ListingActivity(4);
-                listingActivity.StartActivity();
+                Console.Write("Enter the duration in seconds: ");
+                if (int.TryParse(Console.ReadLine(), out int duration) && duration > 0)
+                {
+                    if (choice == "1")
+                    {
+                        BreathingActivity breathingActivity = new BreathingActivity(duration);
+                        breathingActivity.StartActivity();
+                    }
+                    else if (choice == "2")
+                    {
+                        ReflectionActivity reflectionActivity = new ReflectionActivity(duration);
+                        reflectionActivity.StartActivity();
+                    }
+                    else
+                    {
+                        ListingActivity listingActivity = new ListingActivity(duration);
+                        List<string> items = listingActivity.ListItems();
+                        Console.WriteLine($"You listed {items.Count} items.");
+                        listingActivity.StartActivity();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid duration. Please enter a positive number.");
+                    Thread.Sleep(2000);
+                }
             }
             else if (choice == "4")
             {

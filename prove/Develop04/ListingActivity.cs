@@ -7,4 +7,19 @@ public class ListingActivity : BaseActivity
         Console.WriteLine("Think of something: ");
         ShowAnimation();
     }
+    
+    public List<string> ListItems()
+    {
+        List<string> items = new List<string>();
+        Console.WriteLine("Enter items (one per line) and press Enter. Enter 'done' to finish.");
+        string input;
+        while (true)
+        {
+            input = Console.ReadLine();
+            if (input.ToLower() == "done")
+                break;
+            items.Add(input);
+        }
+        return items;
+    }
 }
