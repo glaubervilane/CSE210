@@ -22,7 +22,10 @@ class Program
         }
 
         // Save and load goals using the BaseGoal methods
-        simpleGoal.SaveGoals();
-        simpleGoal.LoadGoals();
+        foreach (var goal in goals)
+        {
+            goal.SaveGoals();
+            goal.LoadGoals();
+        }
     }
 }

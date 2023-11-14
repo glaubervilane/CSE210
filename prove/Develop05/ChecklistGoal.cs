@@ -17,14 +17,13 @@ public class ChecklistGoal : BaseGoal
   {
     _timesAccomplished++;
 
+    base.RecordEvent(); // Call the base method
+
     if (_timesAccomplished == _timesForAccomplishGoal)
     {
-      base.IsCompleted = true;
+      IsCompleted = true;
       Console.WriteLine($"{Name} goal completed!");
     }
-
-    base.RecordEvent();
-    Console.WriteLine($"Event recorded for {Name}."); // Additional logic for recording events for checklist goals
   }
 
   public override int CalculateTotalAmountPoints()

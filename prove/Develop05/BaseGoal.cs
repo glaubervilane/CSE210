@@ -6,9 +6,9 @@ using System.IO;
 public class BaseGoal
 {
   public string Name { get; protected set; }
-  protected string _description;
-  protected bool IsCompleted;
-  protected int _amountPoints;
+  protected string _description { get; set; }
+  protected bool IsCompleted { get; set; }
+  protected int _amountPoints { get; set; }
 
   // Constructor
   public BaseGoal(string name, string description, int amountPoints)
@@ -59,11 +59,16 @@ public class BaseGoal
         bool isCompleted = bool.Parse(parts[2]);
         int amountPoints = int.Parse(parts[3]);
 
-        BaseGoal loadedGoal = new BaseGoal(name, description, amountPoints);
-        loadedGoal.IsCompleted = isCompleted;
-        Console.WriteLine($"{loadedGoal.Name} loaded - Completed: {loadedGoal.GetCompletion()}, Points: {loadedGoal.CalculateTotalAmountPoints()}");
+        if (name == Name)
+        {
+          IsCompleted = isCompleted;
+          _amountPoints = amountPoints;
+          Console.WriteLine($"{Name} loaded - Completed: {GetCompletion()}, Points: {CalculateTotalAmountPoints()}");
+          break;
+        }
       }
     }
+    
     catch (FileNotFoundException)
     {
       Console.WriteLine("No goals found.");

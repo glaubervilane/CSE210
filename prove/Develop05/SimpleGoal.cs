@@ -23,7 +23,7 @@ public class SimpleGoal : BaseGoal
 
   public override bool GetCompletion()
   {
-    return base.IsCompleted;
+    return base.GetCompletion();
   }
 
   // New method specific to SimpleGoal
