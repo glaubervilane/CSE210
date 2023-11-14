@@ -12,7 +12,9 @@ public class EternalGoal : BaseGoal
   // Override methods
   public override void RecordEvent()
   {
-    _amountPoints += _instancePoints;
+    base.RecordEvent();
+    base._amountPoints += _instancePoints;
+    Console.WriteLine($"Event recorded for {Name}."); // Additional logic for recording events for eternal goals
   }
 
   public override int CalculateTotalAmountPoints()

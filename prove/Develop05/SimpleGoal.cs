@@ -12,7 +12,8 @@ public class SimpleGoal : BaseGoal
   // Override methods
   public override void RecordEvent()
   {
-    // Todo - Additional logic for recording events for simple goals
+    base.RecordEvent();
+    Console.WriteLine($"Event recorded for {Name}."); // Additional logic for recording events for simple goals
   }
 
   public override int CalculateTotalAmountPoints()
@@ -29,5 +30,6 @@ public class SimpleGoal : BaseGoal
   public void MarkComplete()
   {
     base.IsCompleted = true;
+    Console.WriteLine($"{Name} goal marked as complete!");
   }
 }

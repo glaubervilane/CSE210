@@ -1,11 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 
 // Base class for all types of goals
 public class BaseGoal
 {
-  // Attributes
-  protected string Name;
+  public string Name { get; protected set; }
   protected string _description;
   protected bool IsCompleted;
   protected int _amountPoints;
@@ -20,7 +20,10 @@ public class BaseGoal
   }
 
   // Virtual methods
-  public virtual void RecordEvent() { }
+  public virtual void RecordEvent()
+  {
+    Console.WriteLine($"{Name} goal recorded!");
+  }
 
   public virtual int CalculateTotalAmountPoints()
   {
@@ -32,17 +35,7 @@ public class BaseGoal
     return IsCompleted;
   }
 
-  // Methods to create a new goal, list goals, save goals to a file, and load goals from a file
-  public void CreateGoal(BaseGoal goal)
-  {
-    // todo
-  }
-
-  public void ListGoals()
-  {
-    Console.WriteLine($"{Name} - Completed: {GetCompletion()}, Points: {CalculateTotalAmountPoints()}");
-  }
-
+  // Method to save goals to a file
   public void SaveGoals()
   {
     using (StreamWriter writer = new StreamWriter("goals.txt"))
@@ -51,6 +44,7 @@ public class BaseGoal
     }
   }
 
+  // Method to load goals from a file
   public void LoadGoals()
   {
     try
@@ -65,10 +59,9 @@ public class BaseGoal
         bool isCompleted = bool.Parse(parts[2]);
         int amountPoints = int.Parse(parts[3]);
 
-        Name = name;
-        _description = description;
-        IsCompleted = isCompleted;
-        _amountPoints = amountPoints;
+        BaseGoal loadedGoal = new BaseGoal(name, description, amountPoints);
+        loadedGoal.IsCompleted = isCompleted;
+        Console.WriteLine($"{loadedGoal.Name} loaded - Completed: {loadedGoal.GetCompletion()}, Points: {loadedGoal.CalculateTotalAmountPoints()}");
       }
     }
     catch (FileNotFoundException)
