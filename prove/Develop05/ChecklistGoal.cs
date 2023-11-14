@@ -1,4 +1,3 @@
-// Derived class for checklist goals
 public class ChecklistGoal : BaseGoal
 {
   // Attributes specific to ChecklistGoal

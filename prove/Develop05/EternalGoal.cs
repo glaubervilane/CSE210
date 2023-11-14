@@ -1,4 +1,3 @@
-// Derived class for eternal goals
 public class EternalGoal : BaseGoal
 {
   // Attribute specific to EternalGoal

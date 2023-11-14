@@ -12,7 +12,7 @@ public class SimpleGoal : BaseGoal
   // Override methods
   public override void RecordEvent()
   {
-    // Additional logic for recording events for simple goals
+    // Todo - Additional logic for recording events for simple goals
   }
 
   public override int CalculateTotalAmountPoints()

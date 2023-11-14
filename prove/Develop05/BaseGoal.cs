@@ -35,8 +35,7 @@ public class BaseGoal
   // Methods to create a new goal, list goals, save goals to a file, and load goals from a file
   public void CreateGoal(BaseGoal goal)
   {
-    // If you still need to manage a list of goals in this class, you can add it back.
-    // For now, I've removed it based on your design document.
+    // todo
   }
 
   public void ListGoals()
