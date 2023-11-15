@@ -5,6 +5,10 @@ public class ChecklistGoal : BaseGoal
   private int _timesAccomplished;
   private int _totalAmountPoints;
 
+  public int TimesAccomplished => _timesAccomplished;
+  public int TimesForAccomplishGoal => _timesForAccomplishGoal;
+
+
   // Constructor
   public ChecklistGoal(string name, string description, int amountPoints, int timesForAccomplishGoal) : base(name, description, amountPoints)
   {

@@ -13,7 +13,7 @@ public class SimpleGoal : BaseGoal
   public override void RecordEvent()
   {
     base.RecordEvent();
-    Console.WriteLine($"Event recorded for {Name}."); // Additional logic for recording events for simple goals
+    Console.WriteLine($"Event recorded for {Name}.");
   }
 
   public override int CalculateTotalAmountPoints()

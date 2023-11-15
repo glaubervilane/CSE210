@@ -1,14 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-
-// Base class for all types of goals
 public class BaseGoal
 {
-  public string Name { get; protected set; }
-  protected string _description { get; set; }
-  protected bool IsCompleted { get; set; }
-  protected int _amountPoints { get; set; }
+  protected internal string Name;
+    protected internal string _description;
+    protected internal bool IsCompleted;
+    protected internal int _amountPoints;
 
   // Constructor
   public BaseGoal(string name, string description, int amountPoints)
@@ -68,7 +63,7 @@ public class BaseGoal
         }
       }
     }
-    
+
     catch (FileNotFoundException)
     {
       Console.WriteLine("No goals found.");

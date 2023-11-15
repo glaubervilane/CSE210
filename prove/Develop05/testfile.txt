@@ -1,0 +1,2 @@
+SimpleGoal,Test goal1 ,Just testing,False,10
+ChecklistGoal,Eternal test,Test Eternal goal,False,20
