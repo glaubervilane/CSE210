@@ -1,37 +1,24 @@
-public class ChecklistGoal : BaseGoal
+class ChecklistGoal : Event
 {
-  // Attributes specific to ChecklistGoal
-  private int _timesForAccomplishGoal;
-  private int _timesAccomplished;
-  private int _totalAmountPoints;
+    public int _times;
+    public int _bonusPoints;
+    public int _currentCount;
 
-  public int TimesAccomplished => _timesAccomplished;
-  public int TimesForAccomplishGoal => _timesForAccomplishGoal;
-
-
-  // Constructor
-  public ChecklistGoal(string name, string description, int amountPoints, int timesForAccomplishGoal) : base(name, description, amountPoints)
-  {
-    _timesForAccomplishGoal = timesForAccomplishGoal;
-    _totalAmountPoints = amountPoints * _timesForAccomplishGoal;
-  }
-
-  // Override methods
-  public override void RecordEvent()
-  {
-    _timesAccomplished++;
-
-    base.RecordEvent(); // Call the base method
-
-    if (_timesAccomplished == _timesForAccomplishGoal)
+    public ChecklistGoal(string name, int points, int times, int bonusPoints, string description) : base(name, points, description)
     {
-      IsCompleted = true;
-      Console.WriteLine($"{Name} goal completed!");
+        _times = times;
+        _bonusPoints = bonusPoints;
     }
-  }
 
-  public override int CalculateTotalAmountPoints()
-  {
-    return _totalAmountPoints;
-  }
+    public override void MarkComplete()
+    {
+        if (!Completed)
+        {
+            _currentCount++;
+            if (_currentCount >= _times)
+            {
+                Completed = true;
+            }
+        }
+    }
 }

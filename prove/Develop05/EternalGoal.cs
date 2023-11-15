@@ -1,24 +1,13 @@
-public class EternalGoal : BaseGoal
+class EternalGoal : Event
 {
-  // Attribute specific to EternalGoal
-  private int _instancePoints;
-
-  // Constructor
-  public EternalGoal(string name, string description, int amountPoints, int instancePoints) : base(name, description, amountPoints)
+  public EternalGoal(string name, int points, string description) : base(name, points, description)
   {
-    _instancePoints = instancePoints;
+
   }
 
-  // Override methods
-  public override void RecordEvent()
+  public override void MarkComplete()
   {
-    base.RecordEvent();
-    _amountPoints += _instancePoints;
-    Console.WriteLine($"Event recorded for {Name}.");
-  }
-
-  public override int CalculateTotalAmountPoints()
-  {
-    return base.CalculateTotalAmountPoints();
+    Completed = false;
+    Console.WriteLine("You are a step forward your Eternal Goal.");
   }
 }

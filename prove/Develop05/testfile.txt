@@ -1,2 +1,4 @@
-SimpleGoal,Test goal1 ,Just testing,False,10
-ChecklistGoal,Eternal test,Test Eternal goal,False,20
+0
+SimpleGoal: "qer1", "asdfsadfasdf", 10, False
+EternalGoal: "yuio", "hjklhjkljk", 20
+ChecklistGoal: "xczv", "edcrfvfrv", 5, 15, 3, 0

@@ -1,16 +1,16 @@
 public class BaseGoal
 {
   protected internal string Name;
-    protected internal string _description;
-    protected internal bool IsCompleted;
-    protected internal int _amountPoints;
+  protected internal string _description;
+  protected internal bool _isCompleted;
+  protected internal int _amountPoints;
 
   // Constructor
   public BaseGoal(string name, string description, int amountPoints)
   {
     Name = name;
     _description = description;
-    IsCompleted = false;
+    _isCompleted = false;
     _amountPoints = amountPoints;
   }
 
@@ -27,7 +27,7 @@ public class BaseGoal
 
   public virtual bool GetCompletion()
   {
-    return IsCompleted;
+    return _isCompleted;
   }
 
   // Method to save goals to a file
@@ -35,7 +35,7 @@ public class BaseGoal
   {
     using (StreamWriter writer = new StreamWriter("goals.txt"))
     {
-      writer.WriteLine($"{Name},{_description},{IsCompleted},{_amountPoints}");
+      writer.WriteLine($"{Name},{_description},{_isCompleted},{_amountPoints}");
     }
   }
 
@@ -56,7 +56,7 @@ public class BaseGoal
 
         if (name == Name)
         {
-          IsCompleted = isCompleted;
+          _isCompleted = isCompleted;
           _amountPoints = amountPoints;
           Console.WriteLine($"{Name} loaded - Completed: {GetCompletion()}, Points: {CalculateTotalAmountPoints()}");
           break;
