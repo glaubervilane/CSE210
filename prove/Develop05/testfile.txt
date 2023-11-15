@@ -1,4 +1,0 @@
-0
-SimpleGoal: "qer1", "asdfsadfasdf", 10, False
-EternalGoal: "yuio", "hjklhjkljk", 20
-ChecklistGoal: "xczv", "edcrfvfrv", 5, 15, 3, 0
