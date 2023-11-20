@@ -1,7 +1,7 @@
 using System.Data;
 
-namespace board {
-  class Position {
+namespace FinalProject.board {
+  public class Position {
     public int _row { get; set; }
     public int _column { get; set; }
 
