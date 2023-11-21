@@ -33,6 +33,9 @@ namespace FinalProject.board
 
         public void putPiece(Piece p, Position pos)
         {
+            if (pieceExists(pos)) {
+                throw new BoardException("There is already a piece in that position!");
+            }
             //Put a piece in a specific position
             pieces[pos._row, pos._column] = p;
             p.Position = pos;
