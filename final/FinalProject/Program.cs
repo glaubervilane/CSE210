@@ -16,6 +16,9 @@ class Program
             {
                 Console.Clear();
                 Screen.printBoard(chessGame.board);
+                Console.WriteLine();
+                Console.WriteLine("Turn: " + chessGame.turn);
+                Console.WriteLine("Waiting turn: " + chessGame.actualPlayer);
 
                 Console.WriteLine();
                 Console.Write("Origin: ");
@@ -30,7 +33,7 @@ class Program
                 Console.Write("Destination: ");
                 Position destination = Screen.readChessPosition().toPosition();
 
-                chessGame.move(origin, destination);
+                chessGame.makePlay(origin, destination);
             }
 
             Screen.printBoard(chessGame.board);

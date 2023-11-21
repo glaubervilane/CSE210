@@ -5,8 +5,8 @@ namespace FinalProject.chess
     public class ChessGame
     {
         public Board board { get; private set; }
-        private int turn;
-        private Color actualPlayer;
+        public int turn { get; private set; }
+        public Color actualPlayer { get; private set; }
         public bool gameFinish { get; private set; }
 
         public ChessGame()
@@ -26,6 +26,24 @@ namespace FinalProject.chess
             board.putPiece(p, destination);
         }
 
+        public void makePlay(Position origin, Position destination) 
+        {
+            move(origin, destination);
+            turn++;
+            changePlayer();
+        }
+
+        private void changePlayer()
+        {
+            if (actualPlayer == Color.White)
+            {
+                actualPlayer = Color.Black;
+            }
+            else 
+            {
+                actualPlayer = Color.White;
+            }
+        }
         private void putPieces() 
         {
             board.putPiece(new Rook(board, Color.White), new ChessPosition('c',1).toPosition());
