@@ -41,6 +41,16 @@ namespace FinalProject.board
             p.Position = pos;
         }
 
+        public Piece takeOffPiece(Position pos) {
+            if (piece(pos) == null) {
+                return null;
+            }
+            Piece helper = piece(pos);
+            helper.Position = null;
+            pieces[pos._row, pos._column] = null;
+            return helper;
+        }
+
         // Check to have position inside of Matrix 8x8
         public bool validPosition(Position pos) {
             if (pos._row<0 || pos._row>=rows || pos._column<0 || pos._column>=columns) {

@@ -13,5 +13,10 @@ namespace FinalProject.board
             this.color = color;
             movements = 0;
         }
+
+        public void incrementMovements()
+        {
+            movements ++;
+        }
     }
 }

@@ -9,15 +9,9 @@ class Program
     {
         try
         {
-            Board board = new Board(8, 8);
+            ChessGame chessGame =  new ChessGame();
 
-            board.putPiece(new Rook(board, Color.Black), new Position(0,0));
-            board.putPiece(new Rook(board, Color.Black), new Position(1,3));
-            board.putPiece(new King(board, Color.Black), new Position(2,4));
-
-            board.putPiece(new Rook(board, Color.White), new Position(3,5));
-
-            Screen.printBoard(board);
+            Screen.printBoard(chessGame.board);
         }
         catch (BoardException e)
         {
