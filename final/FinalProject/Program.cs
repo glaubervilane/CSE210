@@ -35,6 +35,7 @@ class Program
                     Console.WriteLine();
                     Console.Write("Destination: ");
                     Position destination = Screen.readChessPosition().toPosition();
+                    chessGame.validateDestinationPosition(origin, destination);
 
                     chessGame.makePlay(origin, destination);
                 }

@@ -50,6 +50,14 @@ namespace FinalProject.chess
             }
         }
 
+        public void validateDestinationPosition(Position origin, Position destination) 
+        { 
+            if (!board.piece(origin).canMoveTo(destination))
+            {
+                throw new BoardException("Destination invalid!");
+            }
+        }
+
         private void changePlayer()
         {
             if (actualPlayer == Color.White)

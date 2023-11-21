@@ -34,6 +34,11 @@ namespace FinalProject.board
             return false;
         }
 
+        public bool canMoveTo(Position pos)
+        { 
+            return possibleMovements()[pos._row, pos._column];
+        }
+
         public abstract bool[,] possibleMovements();
     }
 }
