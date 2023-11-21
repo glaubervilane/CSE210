@@ -15,9 +15,17 @@ namespace FinalProject.board
             pieces = new Piece[rows, columns];
         }
 
+        //Encapsulation giving access to a matrix element
         public Piece piece(int row, int column)
         {
             return pieces[row, column];
+        }
+
+        public void putPiece(Piece p, Position pos)
+        {
+            //Put a piece in a specific position
+            pieces[pos._row, pos._column] = p;
+            p.Position = pos;
         }
     }
 }
