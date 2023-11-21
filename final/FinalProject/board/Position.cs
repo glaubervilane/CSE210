@@ -12,6 +12,13 @@ namespace FinalProject.board
       _row = row;
       _column = column;
     }
+
+    public void getValues(int row, int column) 
+    { 
+      _row = row;
+      _column = column; 
+    }
+
     public override string ToString()
     {
       return _row

@@ -12,19 +12,38 @@ namespace FinalProject
                 Console.Write(8 - i + " ");
                 for (int j = 0; j < board.columns; j++)
                 {
-                    if (board.piece(i, j) == null)
-                    {
-                        Console.Write("- ");
-                    }
-                    else
-                    {
-                        printPiece(board.piece(i, j));
-                        Console.Write("");
-                    }
+                    printPiece(board.piece(i, j));
                 }
                 Console.WriteLine();
             }
             Console.WriteLine("  a b c d e f g h");
+        }
+
+        public static void printBoard(Board board, bool[,] possiblePositions)
+        {
+            ConsoleColor originalBackground = Console.BackgroundColor;
+            ConsoleColor updatedBackground = ConsoleColor.DarkGray;
+
+            for (int i = 0; i < board.rows; i++)
+            {
+                Console.Write(8 - i + " ");
+                for (int j = 0; j < board.columns; j++)
+                {
+                    if (possiblePositions[i, j])
+                    {
+                        Console.BackgroundColor = updatedBackground;
+                    }
+                    else 
+                    {
+                        Console.BackgroundColor = originalBackground;
+                    }
+                    printPiece(board.piece(i, j));
+                }
+                Console.WriteLine();
+                Console.BackgroundColor = originalBackground;
+            }
+            Console.WriteLine("  a b c d e f g h");
+            Console.BackgroundColor = originalBackground;
         }
 
         public static ChessPosition readChessPosition() 

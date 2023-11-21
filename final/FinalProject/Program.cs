@@ -1,4 +1,5 @@
 using System;
+using System.Reflection.Metadata;
 using FinalProject;
 using FinalProject.board;
 using FinalProject.chess;
@@ -19,6 +20,13 @@ class Program
                 Console.WriteLine();
                 Console.Write("Origin: ");
                 Position origin = Screen.readChessPosition().toPosition();
+
+                bool[,] possiblePositions = chessGame.board.piece(origin).possibleMovements();
+
+                Console.Clear();
+                Screen.printBoard(chessGame.board, possiblePositions);
+
+                Console.WriteLine();
                 Console.Write("Destination: ");
                 Position destination = Screen.readChessPosition().toPosition();
 

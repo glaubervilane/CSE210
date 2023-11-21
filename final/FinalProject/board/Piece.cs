@@ -1,6 +1,6 @@
 namespace FinalProject.board
 {
-    public class Piece
+    public abstract class Piece
     {
         public Position Position { get; set; }
         public Color color { get; protected set; }
@@ -13,10 +13,11 @@ namespace FinalProject.board
             this.color = color;
             movements = 0;
         }
-
         public void incrementMovements()
         {
             movements ++;
         }
+
+        public abstract bool[,] possibleMovements();
     }
 }
