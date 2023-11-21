@@ -11,10 +11,12 @@ namespace FinalProject.chess
 
         public override string ToString()
         {
-            return "R";
+            // return "R";
+            return "♜";
         }
 
-        private bool itCanMove(Position pos) {
+        private bool itCanMove(Position pos) 
+        {
             Piece p = board.piece(pos);
             return p == null || p.color != color;
         }

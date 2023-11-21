@@ -10,30 +10,40 @@ class Program
     {
         try
         {
-            ChessGame chessGame =  new ChessGame();
+            ChessGame chessGame = new ChessGame();
 
-            while (!chessGame.gameFinish) 
+            while (!chessGame.gameFinish)
             {
-                Console.Clear();
-                Screen.printBoard(chessGame.board);
-                Console.WriteLine();
-                Console.WriteLine("Turn: " + chessGame.turn);
-                Console.WriteLine("Waiting turn: " + chessGame.actualPlayer);
+                try
+                {
+                    Console.Clear();
+                    Screen.printBoard(chessGame.board);
+                    Console.WriteLine();
+                    Console.WriteLine("Turn: " + chessGame.turn);
+                    Console.WriteLine("Waiting turn: " + chessGame.actualPlayer);
 
-                Console.WriteLine();
-                Console.Write("Origin: ");
-                Position origin = Screen.readChessPosition().toPosition();
+                    Console.WriteLine();
+                    Console.Write("Origin: ");
+                    Position origin = Screen.readChessPosition().toPosition();
+                    chessGame.validateOriginPosition(origin);
 
-                bool[,] possiblePositions = chessGame.board.piece(origin).possibleMovements();
+                    bool[,] possiblePositions = chessGame.board.piece(origin).possibleMovements();
 
-                Console.Clear();
-                Screen.printBoard(chessGame.board, possiblePositions);
+                    Console.Clear();
+                    Screen.printBoard(chessGame.board, possiblePositions);
 
-                Console.WriteLine();
-                Console.Write("Destination: ");
-                Position destination = Screen.readChessPosition().toPosition();
+                    Console.WriteLine();
+                    Console.Write("Destination: ");
+                    Position destination = Screen.readChessPosition().toPosition();
 
-                chessGame.makePlay(origin, destination);
+                    chessGame.makePlay(origin, destination);
+                }
+                catch(BoardException e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.ReadLine();
+                }
+
             }
 
             Screen.printBoard(chessGame.board);
@@ -42,7 +52,7 @@ class Program
         {
             Console.WriteLine(e.Message);
         }
-        
+
 
         Console.ReadLine();
     }

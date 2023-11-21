@@ -18,6 +18,22 @@ namespace FinalProject.board
             movements ++;
         }
 
+        public bool existPossibleMovements() 
+        {
+            bool[,] mat = possibleMovements();
+            for (int i=0; i<board.rows; i++)
+            {
+                for (int j=0; j<board.columns; j++)
+                {
+                    if (mat[i, j])
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         public abstract bool[,] possibleMovements();
     }
 }

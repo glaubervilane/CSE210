@@ -11,7 +11,8 @@ namespace FinalProject.chess
 
         public override string ToString()
         {
-            return "K";
+            // return "K";
+            return "♚";
         }
 
         private bool itCanMove(Position pos) 

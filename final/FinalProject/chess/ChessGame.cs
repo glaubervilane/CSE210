@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using FinalProject.board;
 
 namespace FinalProject.chess
@@ -31,6 +32,22 @@ namespace FinalProject.chess
             move(origin, destination);
             turn++;
             changePlayer();
+        }
+
+        public void validateOriginPosition(Position pos) 
+        { 
+            if (board.piece(pos) == null )
+            {
+                throw new BoardException("There is no piece in the chosen origin position!");
+            }
+            if (actualPlayer != board.piece(pos).color)
+            {
+                throw new BoardException("The original piece chosen is not yours!");
+            }
+            if (!board.piece(pos).existPossibleMovements())
+            {
+                throw new BoardException("There are no movements possible for the chosen piece!");
+            }
         }
 
         private void changePlayer()
