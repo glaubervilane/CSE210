@@ -3,6 +3,7 @@ namespace FinalProject.board
     public enum Color
     {
         White,
-        Black
+        Black,
+        Yellow
     }
 }
