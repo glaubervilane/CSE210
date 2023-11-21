@@ -11,6 +11,20 @@ class Program
         {
             ChessGame chessGame =  new ChessGame();
 
+            while (!chessGame.gameFinish) 
+            {
+                Console.Clear();
+                Screen.printBoard(chessGame.board);
+
+                Console.WriteLine();
+                Console.Write("Origin: ");
+                Position origin = Screen.readChessPosition().toPosition();
+                Console.Write("Destination: ");
+                Position destination = Screen.readChessPosition().toPosition();
+
+                chessGame.move(origin, destination);
+            }
+
             Screen.printBoard(chessGame.board);
         }
         catch (BoardException e)

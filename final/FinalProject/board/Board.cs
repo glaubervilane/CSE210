@@ -31,6 +31,7 @@ namespace FinalProject.board
             return piece(pos) != null;
         }
 
+        //Encapsulation put pieces under the board
         public void putPiece(Piece p, Position pos)
         {
             if (pieceExists(pos)) {

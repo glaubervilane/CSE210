@@ -7,12 +7,14 @@ namespace FinalProject.chess
         public Board board { get; private set; }
         private int turn;
         private Color actualPlayer;
+        public bool gameFinish { get; private set; }
 
         public ChessGame()
         {
             board = new Board(8, 8);
             turn = 1;
             actualPlayer = Color.White;
+            gameFinish = false;
             putPieces();
         }
 
