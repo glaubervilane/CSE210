@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using System.IO.Pipes;
 using FinalProject.board;
 
 namespace FinalProject.chess
 {
+    //Encapsulation applied in the ChessGame class through the use of private fields with public getters/setters
     public class ChessGame
     {
         public Board board { get; private set; }
@@ -12,6 +12,7 @@ namespace FinalProject.chess
         public bool gameFinish { get; private set; }
         public HashSet<Piece> pieces { get; set; }
         public HashSet<Piece> captured { get; set; }
+        public bool check { get; private set; }
 
         public ChessGame()
         {
@@ -19,12 +20,13 @@ namespace FinalProject.chess
             turn = 1;
             actualPlayer = Color.White;
             gameFinish = false;
+            check = false;
             pieces = new HashSet<Piece>();
             captured = new HashSet<Piece>();
             putPieces();
         }
 
-        public void move(Position origin, Position destination)
+        public Piece move(Position origin, Position destination)
         {
             Piece p = board.takeOffPiece(origin);
             p.incrementMovements();
@@ -34,11 +36,41 @@ namespace FinalProject.chess
             {
                 captured.Add(capturedPiece);
             }
+            return capturedPiece;
+        }
+
+        public void undoMove(Position origin, Position destination, Piece capturedPiece)
+        {
+            Piece p = board.takeOffPiece(destination);
+            p.decrementMovements();
+            board.putPiece(p, destination);
+            if (capturedPiece != null)
+            {
+                board.putPiece(capturedPiece, destination);
+                captured.Remove(capturedPiece);
+            }
+            board.putPiece(p, origin);
         }
 
         public void makePlay(Position origin, Position destination)
         {
-            move(origin, destination);
+            Piece capturedPiece = move(origin, destination);
+
+            if (isInCheck(actualPlayer))
+            {
+                undoMove(origin, destination, capturedPiece);
+                throw new BoardException("You can't put yourself in check");
+            }
+
+            if (isInCheck(enemy(actualPlayer)))
+            {
+                check = true;
+            }
+            else
+            {
+                check = false;
+            }
+
             turn++;
             changePlayer();
         }
@@ -102,8 +134,51 @@ namespace FinalProject.chess
                     aux.Add(x);
                 }
             }
-            aux.Except(capturedPieces(color));
+            aux.ExceptWith(capturedPieces(color));
             return aux;
+        }
+
+        private Color enemy(Color color)
+        {
+            if (color == Color.White)
+            {
+                return Color.Black;
+            }
+            else 
+            {
+                return Color.White;
+            }
+        }
+
+        private Piece king(Color color)
+        {
+            foreach (Piece x in onGamePieces(color))
+            {
+                if (x is King) 
+                {
+                    return x;
+                }
+            }
+            return null;
+        }
+
+        public bool isInCheck(Color color)
+        {
+            Piece K = king(color);
+            if (K == null)
+            {
+                throw new BoardException("There is no King on board!");
+            }
+
+            foreach (Piece x in onGamePieces(enemy(color)))
+            {
+                bool[,] mat = x.possibleMovements();
+                if (mat[K.Position._row, K.Position._column])
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void putNewPiece(char column, int row, Piece piece)

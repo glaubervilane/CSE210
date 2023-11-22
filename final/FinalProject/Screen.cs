@@ -14,7 +14,13 @@ namespace FinalProject
             printCapturedPieces(chessGame);            
             Console.WriteLine(); 
             Console.WriteLine("Turn: " + chessGame.turn);
-            Console.WriteLine("Waiting turn: " + chessGame.actualPlayer);
+            Console.WriteLine("Waiting turn: " + chessGame.actualPlayer); 
+
+            if (chessGame.check)
+            {
+                Console.WriteLine("CHECK!");
+            }           
+            Console.WriteLine();
         }
 
         public static void printCapturedPieces(ChessGame chessGame)

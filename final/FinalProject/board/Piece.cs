@@ -18,6 +18,11 @@ namespace FinalProject.board
             movements ++;
         }
 
+        public void decrementMovements()
+        {
+            movements --;
+        }
+
         public bool existPossibleMovements() 
         {
             bool[,] mat = possibleMovements();
