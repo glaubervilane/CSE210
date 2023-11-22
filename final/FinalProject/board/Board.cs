@@ -26,7 +26,8 @@ namespace FinalProject.board
             return pieces[pos._row, pos._column];
         }
 
-        public bool pieceExists(Position pos) {
+        public bool pieceExists(Position pos)
+        {
             validatePosition(pos);
             return piece(pos) != null;
         }
@@ -34,7 +35,8 @@ namespace FinalProject.board
         //Encapsulation put pieces under the board
         public void putPiece(Piece p, Position pos)
         {
-            if (pieceExists(pos)) {
+            if (pieceExists(pos))
+            {
                 throw new BoardException("There is already a piece in that position!");
             }
             //Put a piece in a specific position
@@ -42,8 +44,10 @@ namespace FinalProject.board
             p.Position = pos;
         }
 
-        public Piece takeOffPiece(Position pos) {
-            if (piece(pos) == null) {
+        public Piece takeOffPiece(Position pos)
+        {
+            if (piece(pos) == null)
+            {
                 return null;
             }
             Piece helper = piece(pos);
@@ -53,15 +57,19 @@ namespace FinalProject.board
         }
 
         // Check to have position inside of Matrix 8x8
-        public bool validPosition(Position pos) {
-            if (pos._row<0 || pos._row>=rows || pos._column<0 || pos._column>=columns) {
+        public bool validPosition(Position pos)
+        {
+            if (pos._row < 0 || pos._row >= rows || pos._column < 0 || pos._column >= columns)
+            {
                 return false;
             }
             return true;
         }
 
-        public void validatePosition(Position pos) {
-            if (!validPosition(pos)) {
+        public void validatePosition(Position pos)
+        {
+            if (!validPosition(pos))
+            {
                 throw new BoardException("Invalid Position!");
             }
         }

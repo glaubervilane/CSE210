@@ -15,22 +15,25 @@ namespace FinalProject.chess
             return "♜";
         }
 
-        private bool itCanMove(Position pos) 
+        private bool itCanMove(Position pos)
         {
             Piece p = board.piece(pos);
             return p == null || p.color != color;
         }
 
-        public override bool[,] possibleMovements() {
+        public override bool[,] possibleMovements()
+        {
             bool[,] mat = new bool[board.rows, board.columns];
 
             Position pos = new Position(0, 0);
 
             //Verify position on top
-            pos.getValues(Position._row -1, Position._column);
-            while (board.validPosition(pos) && itCanMove(pos)) {
+            pos.getValues(Position._row - 1, Position._column);
+            while (board.validPosition(pos) && itCanMove(pos))
+            {
                 mat[pos._row, pos._column] = true;
-                if (board.piece(pos) != null && board.piece(pos).color != color) {
+                if (board.piece(pos) != null && board.piece(pos).color != color)
+                {
                     break;
                 }
                 pos._row = pos._row - 1;
@@ -38,9 +41,11 @@ namespace FinalProject.chess
 
             // Verify position on bottom
             pos.getValues(Position._row + 1, Position._column);
-            while (board.validPosition(pos) && itCanMove(pos)) {
+            while (board.validPosition(pos) && itCanMove(pos))
+            {
                 mat[pos._row, pos._column] = true;
-                if (board.piece(pos) != null && board.piece(pos).color != color) {
+                if (board.piece(pos) != null && board.piece(pos).color != color)
+                {
                     break;
                 }
                 pos._row = pos._row + 1;
@@ -48,9 +53,11 @@ namespace FinalProject.chess
 
             // Verify position on right
             pos.getValues(Position._row, Position._column + 1);
-            while (board.validPosition(pos) && itCanMove(pos)) {
+            while (board.validPosition(pos) && itCanMove(pos))
+            {
                 mat[pos._row, pos._column] = true;
-                if (board.piece(pos) != null && board.piece(pos).color != color) {
+                if (board.piece(pos) != null && board.piece(pos).color != color)
+                {
                     break;
                 }
                 pos._column = pos._column + 1;
@@ -58,9 +65,11 @@ namespace FinalProject.chess
 
             // Verify position on left
             pos.getValues(Position._row, Position._column - 1);
-            while (board.validPosition(pos) && itCanMove(pos)) {
+            while (board.validPosition(pos) && itCanMove(pos))
+            {
                 mat[pos._row, pos._column] = true;
-                if (board.piece(pos) != null && board.piece(pos).color != color) {
+                if (board.piece(pos) != null && board.piece(pos).color != color)
+                {
                     break;
                 }
                 pos._column = pos._column - 1;

@@ -71,8 +71,15 @@ namespace FinalProject.chess
                 check = false;
             }
 
-            turn++;
-            changePlayer();
+            if (testCheckMate(enemy(actualPlayer)))
+            {
+                gameFinish = true;
+            }
+            else
+            {
+                turn++;
+                changePlayer();
+            }
         }
 
         public void validateOriginPosition(Position pos)
@@ -144,7 +151,7 @@ namespace FinalProject.chess
             {
                 return Color.Black;
             }
-            else 
+            else
             {
                 return Color.White;
             }
@@ -154,7 +161,7 @@ namespace FinalProject.chess
         {
             foreach (Piece x in onGamePieces(color))
             {
-                if (x is King) 
+                if (x is King)
                 {
                     return x;
                 }
@@ -179,6 +186,37 @@ namespace FinalProject.chess
                 }
             }
             return false;
+        }
+
+        public bool testCheckMate(Color color)
+        {
+            if (!isInCheck(color))
+            {
+                return false;
+            }
+            foreach (Piece x in onGamePieces(color))
+            {
+                bool[,] mat = x.possibleMovements();
+                for (int i = 0; 1 < board.rows; i++)
+                {
+                    for (int j = 0; j < board.rows; j++)
+                    {
+                        if (mat[i, j])
+                        {
+                            Position origin = x.Position;
+                            Position destination = new Position(i, j);
+                            Piece capturedPiece = move(origin, destination);
+                            bool testCheck = isInCheck(color);
+                            undoMove(origin, destination, capturedPiece);
+                            if (!testCheck)
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
         }
 
         public void putNewPiece(char column, int row, Piece piece)

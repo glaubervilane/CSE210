@@ -36,7 +36,7 @@ class Program
 
                     chessGame.makePlay(origin, destination);
                 }
-                catch(BoardException e)
+                catch (BoardException e)
                 {
                     Console.WriteLine(e.Message);
                     Console.ReadLine();

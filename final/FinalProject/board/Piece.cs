@@ -7,7 +7,8 @@ namespace FinalProject.board
         public int movements { get; protected set; }
         public Board board { get; protected set; }
 
-        public Piece(Board board, Color color) {
+        public Piece(Board board, Color color)
+        {
             Position = null;
             this.board = board;
             this.color = color;
@@ -15,20 +16,20 @@ namespace FinalProject.board
         }
         public void incrementMovements()
         {
-            movements ++;
+            movements++;
         }
 
         public void decrementMovements()
         {
-            movements --;
+            movements--;
         }
 
-        public bool existPossibleMovements() 
+        public bool existPossibleMovements()
         {
             bool[,] mat = possibleMovements();
-            for (int i=0; i<board.rows; i++)
+            for (int i = 0; i < board.rows; i++)
             {
-                for (int j=0; j<board.columns; j++)
+                for (int j = 0; j < board.columns; j++)
                 {
                     if (mat[i, j])
                     {
@@ -40,7 +41,7 @@ namespace FinalProject.board
         }
 
         public bool canMoveTo(Position pos)
-        { 
+        {
             return possibleMovements()[pos._row, pos._column];
         }
 

@@ -14,7 +14,8 @@ namespace FinalProject.chess
         }
 
         // Convert squares following chess rules
-        public Position toPosition() {
+        public Position toPosition()
+        {
             return new Position(8 - _row, _column - 'a');
         }
 

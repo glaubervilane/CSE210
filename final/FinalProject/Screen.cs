@@ -11,30 +11,36 @@ namespace FinalProject
         {
             Screen.printBoard(chessGame.board);
             Console.WriteLine();
-            printCapturedPieces(chessGame);            
-            Console.WriteLine(); 
+            printCapturedPieces(chessGame);
+            Console.WriteLine();
             Console.WriteLine("Turn: " + chessGame.turn);
-            Console.WriteLine("Waiting turn: " + chessGame.actualPlayer); 
-
-            if (chessGame.check)
+            if (!chessGame.gameFinish)
             {
-                Console.WriteLine("CHECK!");
-            }           
+                Console.WriteLine("Waiting turn: " + chessGame.actualPlayer);
+                if (chessGame.check)
+                {
+                    Console.WriteLine("CHECK!");
+                }
+            }
+            else
+            {
+                Console.WriteLine("");
+            }
             Console.WriteLine();
         }
 
         public static void printCapturedPieces(ChessGame chessGame)
-        { 
-            Console.WriteLine("Captured pieces: "); 
+        {
+            Console.WriteLine("Captured pieces: ");
             Console.Write("White: ");
             printSet(chessGame.capturedPieces(Color.White));
-            Console.WriteLine(); 
+            Console.WriteLine();
             Console.Write("Black: ");
             ConsoleColor aux = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Yellow;
-            printSet(chessGame.capturedPieces(Color.Black)); 
-            Console.ForegroundColor = aux;           
-            Console.WriteLine(); 
+            printSet(chessGame.capturedPieces(Color.Black));
+            Console.ForegroundColor = aux;
+            Console.WriteLine();
         }
 
         public static void printSet(HashSet<Piece> set)
@@ -74,7 +80,7 @@ namespace FinalProject
                     {
                         Console.BackgroundColor = updatedBackground;
                     }
-                    else 
+                    else
                     {
                         Console.BackgroundColor = originalBackground;
                     }
@@ -87,7 +93,7 @@ namespace FinalProject
             Console.BackgroundColor = originalBackground;
         }
 
-        public static ChessPosition readChessPosition() 
+        public static ChessPosition readChessPosition()
         {
             string s = Console.ReadLine();
             char column = s[0];
@@ -95,16 +101,20 @@ namespace FinalProject
             return new ChessPosition(column, row);
         }
 
-        public static void printPiece(Piece piece) 
+        public static void printPiece(Piece piece)
         {
-            if (piece == null) {
+            if (piece == null)
+            {
                 Console.Write("- ");
             }
-            else {
-                if (piece.color == Color.White) {
+            else
+            {
+                if (piece.color == Color.White)
+                {
                     Console.Write(piece);
                 }
-                else {
+                else
+                {
                     ConsoleColor aux = Console.ForegroundColor;
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.Write(piece);
