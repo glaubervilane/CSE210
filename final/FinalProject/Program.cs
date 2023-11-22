@@ -17,10 +17,7 @@ class Program
                 try
                 {
                     Console.Clear();
-                    Screen.printBoard(chessGame.board);
-                    Console.WriteLine();
-                    Console.WriteLine("Turn: " + chessGame.turn);
-                    Console.WriteLine("Waiting turn: " + chessGame.actualPlayer);
+                    Screen.printChessGame(chessGame);
 
                     Console.WriteLine();
                     Console.Write("Origin: ");
