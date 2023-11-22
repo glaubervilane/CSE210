@@ -24,7 +24,8 @@ namespace FinalProject
             }
             else
             {
-                Console.WriteLine("");
+                Console.WriteLine("CHECKMATE!");
+                Console.WriteLine("Winner: " + chessGame.actualPlayer);
             }
             Console.WriteLine();
         }

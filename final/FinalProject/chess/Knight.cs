@@ -21,9 +21,45 @@ namespace FinalProject.chess
             return p == null || p.color != color;
         }
 
-        public override bool[,] possibleMovements()
-        {
-            return null;
+        public override bool[,] possibleMovements() {
+            bool[,] mat = new bool[board.rows, board.columns];
+
+            Position pos = new Position(0, 0);
+
+            pos.getValues(Position._row - 1, Position._column - 2);
+            if (board.validPosition(pos) && itCanMove(pos)) {
+                mat[pos._row, pos._column] = true;
+            }
+            pos.getValues(Position._row - 2, Position._column - 1);
+            if (board.validPosition(pos) && itCanMove(pos)) {
+                mat[pos._row, pos._column] = true;
+            }
+            pos.getValues(Position._row - 2, Position._column + 1);
+            if (board.validPosition(pos) && itCanMove(pos)) {
+                mat[pos._row, pos._column] = true;
+            }
+            pos.getValues(Position._row - 1, Position._column + 2);
+            if (board.validPosition(pos) && itCanMove(pos)) {
+                mat[pos._row, pos._column] = true;
+            }
+            pos.getValues(Position._row + 1, Position._column + 2);
+            if (board.validPosition(pos) && itCanMove(pos)) {
+                mat[pos._row, pos._column] = true;
+            }
+            pos.getValues(Position._row + 2, Position._column + 1);
+            if (board.validPosition(pos) && itCanMove(pos)) {
+                mat[pos._row, pos._column] = true;
+            }
+            pos.getValues(Position._row + 2, Position._column - 1);
+            if (board.validPosition(pos) && itCanMove(pos)) {
+                mat[pos._row, pos._column] = true;
+            }
+            pos.getValues(Position._row + 1, Position._column - 2);
+            if (board.validPosition(pos) && itCanMove(pos)) {
+                mat[pos._row, pos._column] = true;
+            }
+
+            return mat;
         }
     }
 }

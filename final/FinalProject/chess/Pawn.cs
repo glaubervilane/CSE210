@@ -5,8 +5,10 @@ namespace FinalProject.chess
     // Pawn inherit from class Piece
     public class Pawn : Piece
     {
-        public Pawn(Board board, Color color) : base(board, color)
+        private ChessGame chessGame;
+        public Pawn(Board board, Color color, ChessGame chessGame) : base(board, color)
         {
+            this.chessGame = chessGame;
         }
 
         public override string ToString()
@@ -21,9 +23,8 @@ namespace FinalProject.chess
             return p == null || p.color != color;
         }
 
-        public override bool[,] possibleMovements()
-        {
-            return null;
+        public override bool[,] possibleMovements() {
+            
         }
     }
 }
