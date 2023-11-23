@@ -36,6 +36,45 @@ namespace FinalProject.chess
             {
                 captured.Add(capturedPiece);
             }
+
+            // #special movement little castle
+            if (p is King && destination._column == origin._column + 2)
+            {
+                Position originT = new Position(origin._row, origin._column + 3);
+                Position destinationT = new Position(origin._row, origin._column + 1);
+                Piece T = board.takeOffPiece(originT);
+                T.incrementMovements();
+                board.putPiece(T, destinationT);
+            }
+
+            // #special movement big castle
+            if (p is King && destination._column == origin._column - 2)
+            {
+                Position originT = new Position(origin._row, origin._column - 4);
+                Position destinationT = new Position(origin._row, origin._column - 1);
+                Piece T = board.takeOffPiece(originT);
+                T.incrementMovements();
+                board.putPiece(T, destinationT);
+            }
+
+            // #special movement en passant
+            if (p is Pawn)
+            {
+                if (origin._column != destination._column && capturedPiece == null)
+                {
+                    Position posP;
+                    if (p.color == Color.White)
+                    {
+                        posP = new Position(destination._row + 1, destination._column);
+                    }
+                    else
+                    {
+                        posP = new Position(destination._row - 1, destination._column);
+                    }
+                    capturedPiece = board.takeOffPiece(posP);
+                    captured.Add(capturedPiece);
+                }
+            }
             return capturedPiece;
         }
 
@@ -219,9 +258,9 @@ namespace FinalProject.chess
             return true;
         }
 
-        public void putNewPiece(char column, int row, Piece piece)
+        public void putNewPiece(char column, int _row, Piece piece)
         {
-            board.putPiece(piece, new ChessPosition(column, row).toPosition());
+            board.putPiece(piece, new ChessPosition(column, _row).toPosition());
             pieces.Add(piece);
         }
         private void putPieces()
