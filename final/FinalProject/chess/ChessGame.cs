@@ -13,6 +13,7 @@ namespace FinalProject.chess
         public HashSet<Piece> pieces { get; set; }
         public HashSet<Piece> captured { get; set; }
         public bool check { get; private set; }
+        public Piece vulnerableEnPassant { get; private set; }
 
         public ChessGame()
         {
@@ -21,6 +22,7 @@ namespace FinalProject.chess
             actualPlayer = Color.White;
             gameFinish = false;
             check = false;
+            vulnerableEnPassant = null;
             pieces = new HashSet<Piece>();
             captured = new HashSet<Piece>();
             putPieces();
@@ -118,6 +120,16 @@ namespace FinalProject.chess
             {
                 turn++;
                 changePlayer();
+            }
+
+            Piece p = board.piece(destination);
+
+            // #special move en passant
+            if (p is Pawn && (destination._row == origin._column - 2 || destination._row == origin._column + 2)) {
+                vulnerableEnPassant = p;
+            }
+            else {
+                vulnerableEnPassant = null;
             }
         }
 

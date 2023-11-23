@@ -57,12 +57,12 @@ namespace FinalProject.chess
                 if (Position._row == 3)
                 {
                     Position left = new Position(Position._row, Position._column - 1);
-                    if (board.validPosition(left) && enemyExist(left) && board.piece(left) == chessGame.vulneravelEnPassant)
+                    if (board.validPosition(left) && enemyExist(left) && board.piece(left) == chessGame.vulnerableEnPassant)
                     {
                         mat[left._row - 1, left._column] = true;
                     }
                     Position right = new Position(Position._row, Position._column + 1);
-                    if (board.validPosition(right) && enemyExist(right) && board.piece(right) == ChessGame.vulneravelEnPassant)
+                    if (board.validPosition(right) && enemyExist(right) && board.piece(right) == chessGame.vulnerableEnPassant)
                     {
                         mat[right._row - 1, right._column] = true;
                     }
@@ -101,7 +101,7 @@ namespace FinalProject.chess
                         mat[left._row + 1, left._column] = true;
                     }
                     Position right = new Position(Position._row, Position._column + 1);
-                    if (board.validPosition(right) && enemyExist(right) && board.piece(right) == chessGame.vulneravelEnPassant)
+                    if (board.validPosition(right) && enemyExist(right) && board.piece(right) == chessGame.vulnerableEnPassant)
                     {
                         mat[right._row + 1, right._column] = true;
                     }
