@@ -41,20 +41,20 @@ namespace FinalProject.chess
             if (p is King && destination._column == origin._column + 2)
             {
                 Position originR = new Position(origin._row, origin._column + 3);
-                Position destinationT = new Position(origin._row, origin._column + 1);
+                Position destinationR = new Position(origin._row, origin._column + 1);
                 Piece R = board.takeOffPiece(originR);
                 R.incrementMovements();
-                board.putPiece(R, destinationT);
+                board.putPiece(R, destinationR);
             }
 
             // #special movement big castle
             if (p is King && destination._column == origin._column - 2)
             {
                 Position originR = new Position(origin._row, origin._column - 4);
-                Position destinationT = new Position(origin._row, origin._column - 1);
+                Position destinationR = new Position(origin._row, origin._column - 1);
                 Piece R = board.takeOffPiece(originR);
                 R.incrementMovements();
-                board.putPiece(R, destinationT);
+                board.putPiece(R, destinationR);
             }
 
             // #special movement en passant
