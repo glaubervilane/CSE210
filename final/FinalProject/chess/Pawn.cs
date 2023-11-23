@@ -17,6 +17,15 @@ namespace FinalProject.chess
             return "♟";
         }
 
+        private bool enemyExist(Position pos) {
+            Piece p = board.piece(pos);
+            return p != null && p.color != color;
+        }
+
+        private bool free(Position pos) {
+            return board.piece(pos) == null;
+        }
+
         private bool itCanMove(Position pos)
         {
             Piece p = board.piece(pos);
@@ -96,7 +105,7 @@ namespace FinalProject.chess
                 if (Position._row == 4)
                 {
                     Position left = new Position(Position._row, Position._column - 1);
-                    if (board.validPosition(left) && enemyExist(left) && board.piece(left) == chessGame.vulneravelEnPassant)
+                    if (board.validPosition(left) && enemyExist(left) && board.piece(left) == chessGame.vulnerableEnPassant)
                     {
                         mat[left._row + 1, left._column] = true;
                     }
