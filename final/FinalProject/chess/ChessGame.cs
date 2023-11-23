@@ -136,6 +136,19 @@ namespace FinalProject.chess
                 throw new BoardException("You can't put yourself in check");
             }
 
+            Piece p = board.piece(destination);
+
+            // #Special turn promotion
+            if (p is Pawn) {
+                if ((p.color == Color.White && destination._row == 0) || (p.color == Color.Black && destination._row == 7)) {
+                    p = board.takeOffPiece(destination);
+                    pieces.Remove(p);
+                    Piece queen = new Queen(board, p.color);
+                    board.putPiece(queen, destination);
+                    pieces.Add(queen);
+                }
+            }
+
             if (isInCheck(enemy(actualPlayer)))
             {
                 check = true;
@@ -154,8 +167,6 @@ namespace FinalProject.chess
                 turn++;
                 changePlayer();
             }
-
-            Piece p = board.piece(destination);
 
             // #special move en passant
             if (p is Pawn && (destination._row == origin._column - 2 || destination._row == origin._column + 2)) {
