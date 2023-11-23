@@ -21,6 +21,7 @@ namespace FinalProject.chess
             return p == null || p.color != color;
         }
 
+        // Demonstrate polymorphism applying the method from Piece abstract class
         public override bool[,] possibleMovements()
         {
             bool[,] mat = new bool[board.rows, board.columns];

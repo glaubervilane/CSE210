@@ -1,5 +1,6 @@
 namespace FinalProject.board
 {
+    // Polymorphism example
     public abstract class Piece
     {
         public Position Position { get; set; }
@@ -45,6 +46,8 @@ namespace FinalProject.board
             return possibleMovements()[pos._row, pos._column];
         }
 
+
+        // Demonstrate polymorphism applying this method in all pieaces
         public abstract bool[,] possibleMovements();
     }
 }

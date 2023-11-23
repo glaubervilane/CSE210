@@ -93,7 +93,8 @@ namespace FinalProject.chess
             board.putPiece(p, origin);
 
             // #special little castle
-            if (p is King && destination._column == origin._column + 2) {
+            if (p is King && destination._column == origin._column + 2)
+            {
                 Position originR = new Position(origin._row, origin._column + 3);
                 Position destinoT = new Position(origin._row, origin._column + 1);
                 Piece T = board.takeOffPiece(destinoT);
@@ -102,7 +103,8 @@ namespace FinalProject.chess
             }
 
             // #special big castle
-            if (p is King && destination._column == origin._column - 2) {
+            if (p is King && destination._column == origin._column - 2)
+            {
                 Position originR = new Position(origin._row, origin._column - 4);
                 Position destinoT = new Position(origin._row, origin._column - 1);
                 Piece T = board.takeOffPiece(destinoT);
@@ -111,14 +113,18 @@ namespace FinalProject.chess
             }
 
             // #special en passant
-            if (p is Pawn) {
-                if (origin._column != destination._column && capturedPiece == vulnerableEnPassant) {
+            if (p is Pawn)
+            {
+                if (origin._column != destination._column && capturedPiece == vulnerableEnPassant)
+                {
                     Piece peao = board.takeOffPiece(destination);
                     Position posP;
-                    if (p.color == Color.White) {
+                    if (p.color == Color.White)
+                    {
                         posP = new Position(3, destination._column);
                     }
-                    else {
+                    else
+                    {
                         posP = new Position(4, destination._column);
                     }
                     board.putPiece(peao, posP);
@@ -139,8 +145,10 @@ namespace FinalProject.chess
             Piece p = board.piece(destination);
 
             // #Special turn promotion
-            if (p is Pawn) {
-                if ((p.color == Color.White && destination._row == 0) || (p.color == Color.Black && destination._row == 7)) {
+            if (p is Pawn)
+            {
+                if ((p.color == Color.White && destination._row == 0) || (p.color == Color.Black && destination._row == 7))
+                {
                     p = board.takeOffPiece(destination);
                     pieces.Remove(p);
                     Piece queen = new Queen(board, p.color);
@@ -169,10 +177,12 @@ namespace FinalProject.chess
             }
 
             // #special move en passant
-            if (p is Pawn && (destination._row == origin._column - 2 || destination._row == origin._column + 2)) {
+            if (p is Pawn && (destination._row == origin._column - 2 || destination._row == origin._column + 2))
+            {
                 vulnerableEnPassant = p;
             }
-            else {
+            else
+            {
                 vulnerableEnPassant = null;
             }
         }

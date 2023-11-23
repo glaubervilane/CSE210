@@ -17,12 +17,14 @@ namespace FinalProject.chess
             return "♟";
         }
 
-        private bool enemyExist(Position pos) {
+        private bool enemyExist(Position pos)
+        {
             Piece p = board.piece(pos);
             return p != null && p.color != color;
         }
 
-        private bool free(Position pos) {
+        private bool free(Position pos)
+        {
             return board.piece(pos) == null;
         }
 
@@ -32,6 +34,7 @@ namespace FinalProject.chess
             return p == null || p.color != color;
         }
 
+        // Demonstrate polymorphism applying the method from Piece abstract class
         public override bool[,] possibleMovements()
         {
             bool[,] mat = new bool[board.rows, board.columns];
