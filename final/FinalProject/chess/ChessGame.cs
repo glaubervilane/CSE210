@@ -91,6 +91,39 @@ namespace FinalProject.chess
                 captured.Remove(capturedPiece);
             }
             board.putPiece(p, origin);
+
+            // #special little castle
+            if (p is King && destination._column == origin._column + 2) {
+                Position originR = new Position(origin._row, origin._column + 3);
+                Position destinoT = new Position(origin._row, origin._column + 1);
+                Piece T = board.takeOffPiece(destinoT);
+                T.decrementMovements();
+                board.putPiece(T, originR);
+            }
+
+            // #special big castle
+            if (p is King && destination._column == origin._column - 2) {
+                Position originR = new Position(origin._row, origin._column - 4);
+                Position destinoT = new Position(origin._row, origin._column - 1);
+                Piece T = board.takeOffPiece(destinoT);
+                T.decrementMovements();
+                board.putPiece(T, originR);
+            }
+
+            // #special en passant
+            if (p is Pawn) {
+                if (origin._column != destination._column && capturedPiece == vulnerableEnPassant) {
+                    Piece peao = board.takeOffPiece(destination);
+                    Position posP;
+                    if (p.color == Color.White) {
+                        posP = new Position(3, destination._column);
+                    }
+                    else {
+                        posP = new Position(4, destination._column);
+                    }
+                    board.putPiece(peao, posP);
+                }
+            }
         }
 
         public void makePlay(Position origin, Position destination)
