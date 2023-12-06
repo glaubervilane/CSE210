@@ -302,9 +302,9 @@ namespace FinalProject.chess
             foreach (Piece x in onGamePieces(color))
             {
                 bool[,] mat = x.possibleMovements();
-                for (int i = 0; 1 < board.rows; i++)
+                for (int i = 0; i < board.rows; i++)
                 {
-                    for (int j = 0; j < board.rows; j++)
+                    for (int j = 0; j < board.columns; j++)
                     {
                         if (mat[i, j])
                         {
