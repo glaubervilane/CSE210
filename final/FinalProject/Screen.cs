@@ -95,11 +95,36 @@ namespace FinalProject
 
         public static ChessPosition readChessPosition()
         {
-            string s = Console.ReadLine();
-            char column = s[0];
-            int row = int.Parse(s[1] + "");
-            return new ChessPosition(column, row);
+            while (true) // Keep looping until valid input is provided
+            {
+                string s = Console.ReadLine();
+
+                // Check if the string is long enough to extract column and row
+                if (s.Length < 2)
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid chess position.");
+                    // Continue to the next iteration of the loop to prompt the user again
+                    continue;
+                }
+
+                char column = s[0];
+
+                // Attempt to parse the second character as an integer
+                if (int.TryParse(s[1].ToString(), out int row))
+                {
+                    // Check if the row is within a valid range
+                    if (row >= 1 && row <= 8)
+                    {
+                        return new ChessPosition(column, row);
+                    }
+                }
+
+                Console.WriteLine("Invalid input. Please enter a valid chess position.");
+                // Continue to the next iteration of the loop to prompt the user again
+            }
         }
+
+
 
         public static void printPiece(Piece piece)
         {
