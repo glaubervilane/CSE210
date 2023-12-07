@@ -11,7 +11,7 @@ namespace FinalProject.chess
 
         public override string ToString()
         {
-            // return "Q";
+            // return "♛";
             return "♛";
         }
 

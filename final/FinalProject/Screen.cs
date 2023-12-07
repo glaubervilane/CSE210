@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using FinalProject.board;
 using FinalProject.chess;
 
@@ -9,7 +8,7 @@ namespace FinalProject
 
         public static void printChessGame(ChessGame chessGame)
         {
-            Screen.printBoard(chessGame.board);
+            printBoard(chessGame.board);
             Console.WriteLine();
             printCapturedPieces(chessGame);
             Console.WriteLine();
@@ -86,9 +85,9 @@ namespace FinalProject
                         Console.BackgroundColor = originalBackground;
                     }
                     printPiece(board.piece(i, j));
+                    Console.BackgroundColor = originalBackground;
                 }
                 Console.WriteLine();
-                Console.BackgroundColor = originalBackground;
             }
             Console.WriteLine("  a b c d e f g h");
             Console.BackgroundColor = originalBackground;
