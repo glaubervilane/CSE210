@@ -44,7 +44,7 @@ namespace FinalProject.board
             p.Position = pos;
         }
 
-        public Piece takeOffPiece(Position pos)
+        public Piece removePiece(Position pos)
         {
             if (piece(pos) == null)
             {

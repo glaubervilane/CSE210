@@ -30,9 +30,9 @@ namespace FinalProject.chess
 
         public Piece move(Position origin, Position destination)
         {
-            Piece p = board.takeOffPiece(origin);
+            Piece p = board.removePiece(origin);
             p.incrementMovements();
-            Piece capturedPiece = board.takeOffPiece(destination);
+            Piece capturedPiece = board.removePiece(destination);
             board.putPiece(p, destination);
             if (capturedPiece != null)
             {
@@ -44,7 +44,7 @@ namespace FinalProject.chess
             {
                 Position originR = new Position(origin._row, origin._column + 3);
                 Position destinationR = new Position(origin._row, origin._column + 1);
-                Piece R = board.takeOffPiece(originR);
+                Piece R = board.removePiece(originR);
                 R.incrementMovements();
                 board.putPiece(R, destinationR);
             }
@@ -54,7 +54,7 @@ namespace FinalProject.chess
             {
                 Position originR = new Position(origin._row, origin._column - 4);
                 Position destinationR = new Position(origin._row, origin._column - 1);
-                Piece R = board.takeOffPiece(originR);
+                Piece R = board.removePiece(originR);
                 R.incrementMovements();
                 board.putPiece(R, destinationR);
             }
@@ -73,7 +73,7 @@ namespace FinalProject.chess
                     {
                         posP = new Position(destination._row - 1, destination._column);
                     }
-                    capturedPiece = board.takeOffPiece(posP);
+                    capturedPiece = board.removePiece(posP);
                     captured.Add(capturedPiece);
                 }
             }
@@ -82,7 +82,7 @@ namespace FinalProject.chess
 
         public void undoMove(Position origin, Position destination, Piece capturedPiece)
         {
-            Piece p = board.takeOffPiece(destination);
+            Piece p = board.removePiece(destination);
             p.decrementMovements();
             board.putPiece(p, destination);
             if (capturedPiece != null)
@@ -97,7 +97,7 @@ namespace FinalProject.chess
             {
                 Position originR = new Position(origin._row, origin._column + 3);
                 Position destinoT = new Position(origin._row, origin._column + 1);
-                Piece T = board.takeOffPiece(destinoT);
+                Piece T = board.removePiece(destinoT);
                 T.decrementMovements();
                 board.putPiece(T, originR);
             }
@@ -107,7 +107,7 @@ namespace FinalProject.chess
             {
                 Position originR = new Position(origin._row, origin._column - 4);
                 Position destinoT = new Position(origin._row, origin._column - 1);
-                Piece T = board.takeOffPiece(destinoT);
+                Piece T = board.removePiece(destinoT);
                 T.decrementMovements();
                 board.putPiece(T, originR);
             }
@@ -117,7 +117,7 @@ namespace FinalProject.chess
             {
                 if (origin._column != destination._column && capturedPiece == vulnerableEnPassant)
                 {
-                    Piece peao = board.takeOffPiece(destination);
+                    Piece peao = board.removePiece(destination);
                     Position posP;
                     if (p.color == Color.White)
                     {
@@ -149,7 +149,7 @@ namespace FinalProject.chess
             {
                 if ((p.color == Color.White && destination._row == 0) || (p.color == Color.Black && destination._row == 7))
                 {
-                    p = board.takeOffPiece(destination);
+                    p = board.removePiece(destination);
                     pieces.Remove(p);
                     Piece queen = new Queen(board, p.color);
                     board.putPiece(queen, destination);
